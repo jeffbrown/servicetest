@@ -4,17 +4,17 @@ import grails.gorm.transactions.Transactional
 
 class PersonService {
 
-    @Transactional
+    @Transactional(connection='people')
     Person savePersonWithoutFlush(String name) {
         new Person(name: name).save()
     }
 
-    @Transactional
+    @Transactional(connection='people')
     Person savePersonWithFlush(String name) {
         new Person(name: name).save(flush: true)
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(connection='people', readOnly = true)
     Person findPerson(String name) {
         Person.findByName(name)
     }
